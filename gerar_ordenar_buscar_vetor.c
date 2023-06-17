@@ -2,10 +2,11 @@
 #include<stdlib.h>
 #include<time.h>
 
+int tamanho_vetor = 0;
 int vetor_gerado = 0;
 int vetor_ordenado = 0;
 
-void mostrar_menu(){
+void mostrar_menu(int vetor[]){
     char op;
 
     do{
@@ -20,19 +21,19 @@ void mostrar_menu(){
         switch(op){
         case 'a':
         case 'A':
-            gerar_vetor();
+            gerar_vetor(vetor);
             break;
         case 'b':
         case 'B':
-            ordenar_vetor();
+            ordenar_vetor(vetor);
             break;
         case 'c':
         case 'C':
-            gerar_busca_sequencial();
+            gerar_busca_sequencial(vetor);
             break;
         case 'd':
         case 'D':
-            gerar_busca_binaria();
+            gerar_busca_binaria(vetor);
             break;
         case 'e':
         case 'E':
@@ -44,59 +45,95 @@ void mostrar_menu(){
     }while(op != 'e' || op != 'E');
 }
 
-int gerar_vetor(){
-    int i = 0;
-    int tamanho = 0;
-
+int pegar_tamanho_vetor(){
     printf("Digite o tamanho do vetor de inteiros: ");
-    scanf("%d", &tamanho);
+    scanf("%d", &tamanho_vetor);
 
-    int vetor[tamanho];
+    return tamanho_vetor;
+}
+
+int gerar_vetor(int vetor[]){
+    pegar_tamanho_vetor();
 
     srand(time(NULL));
 
-    for(i = 0; i < tamanho; i++){
+    for(int i = 0; i < tamanho_vetor; i++){
         vetor[i] = rand();
     }
 
-    for(i = 0; i < tamanho; i++){
+    vetor_gerado++;
+
+    return tamanho_vetor;
+}
+
+void mostrar_vetor(int vetor[]){
+    for(int i = 0; i < tamanho_vetor; i++){
         printf("%d\n", vetor[i]);
     }
 
     printf("\n");
-
-    return vetor_gerado++;
 }
 
-int ordenar_vetor(){
+void ordenar_vetor(int vetor[]){
     if(vetor_gerado > 0){
+        char op;
 
-        return vetor_ordenado++;
+        do{
+            printf("Escolha uma opcao:\n\n");
+            printf("I. Insertion Sort\n");
+            printf("M. Merge Sort\n");
+            printf("V. Voltar ao menu anterior\n\n");
+            scanf(" %c", &op);
+
+            if(op == 'I' || op == 'i'){
+                printf("Insertion\n\n");
+            }else if(op == 'M' || op == 'm'){
+                printf("Merge\n\n");
+            }else if(op == 'V' || op == 'v'){
+                break;
+            }else{
+                printf("Opcao invalida\n\n");
+            }
+        }while(op != 'V' || op != 'v');
+
+        //mostrar_vetor(vetor);
+
+        vetor_ordenado++;
     }else{
         printf("Eh necessario gerar o vetor antes de ordena-lo!\n\n");
-
-        return vetor_ordenado;
     }
 }
 
-void gerar_busca_sequencial(){
+void gerar_busca_sequencial(int vetor[]){
     if(vetor_gerado > 0){
-        printf("%d\n", vetor_gerado);
+        int numero = 0;
+
+        printf("Digite um numero: ");
+        scanf("%d", &numero);
+
+        printf("%d\n\n", numero);
     }else{
         printf("Eh necessario gerar o vetor antes de fazer a busca sequencial!\n\n");
     }
 }
 
-void gerar_busca_binaria(){
+void gerar_busca_binaria(int vetor[]){
     if(vetor_gerado > 0 && vetor_ordenado > 0){
-        printf("%d\n", vetor_gerado);
-        printf("%d\n", vetor_ordenado);
+        int numero = 0;
+
+        printf("Digite um numero: ");
+        scanf("%d", &numero);
+
+        printf("%d\n\n", numero);
     }else{
         printf("Eh necessario gerar e ordenar o vetor antes de fazer a busca binaria!\n\n");
     }
 }
 
 int main(){
-    mostrar_menu();
+    int vet[] = {};
+
+    mostrar_menu(vet);
+
     return 0;
 }
