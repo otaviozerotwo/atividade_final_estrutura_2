@@ -90,7 +90,7 @@ void merge(int vetor[], int inicio, int meio, int fim){
     int temp[fim - inicio + 1];
     int i = inicio, j = meio + 1, k = 0;
 
-    while(i < meio && j <= fim){
+    while(i <= meio && j <= fim){
         if(vetor[i] <= vetor[j]){
             temp[k++] = vetor[i++];
         }else{
