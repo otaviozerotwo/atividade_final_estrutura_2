@@ -74,6 +74,18 @@ void mostrar_vetor(int vetor[]){
     printf("\n");
 }
 
+void insertion_sort(int vetor[]){
+    for(int i = 1; i < tamanho_vetor; i++){
+        int x = vetor[i], j;
+
+        for(j = i - 1; j >= 0 && x < vetor[j]; j--){
+            vetor[j + 1] = vetor[j];
+        }
+        vetor[j + 1] = x;
+    }
+    printf("Vetor ordenado com Insertion Sort\n\n");
+}
+
 void ordenar_vetor(int vetor[]){
     if(vetor_gerado > 0){
         char op;
@@ -86,7 +98,8 @@ void ordenar_vetor(int vetor[]){
             scanf(" %c", &op);
 
             if(op == 'I' || op == 'i'){
-                printf("Insertion\n\n");
+                insertion_sort(vetor);
+                mostrar_vetor(vetor);
             }else if(op == 'M' || op == 'm'){
                 printf("Merge\n\n");
             }else if(op == 'V' || op == 'v'){
@@ -95,8 +108,6 @@ void ordenar_vetor(int vetor[]){
                 printf("Opcao invalida\n\n");
             }
         }while(op != 'V' || op != 'v');
-
-        //mostrar_vetor(vetor);
 
         vetor_ordenado++;
     }else{
